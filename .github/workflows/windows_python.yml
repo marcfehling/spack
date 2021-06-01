@@ -37,16 +37,15 @@ jobs:
         python-version: 3.9
     - name: Install Python packages
       run: |
-        python -m pip install --upgrade pip six setuptools flake8 mypy>=0.800 black
+        python -m pip install --upgrade pip six setuptools flake8 mypy>=0.800 black pywin32
     - name: Run style tests
       run: |
-          python bin/spack style
+          python bin\spack style
     - name: Verify license headers
       run: |
-          python bin/spack license verify
+          python bin\spack license verify
   unittest:
     runs-on: windows-latest
-    needs: [ style ]
     strategy:
       matrix:
         python-version: [3.8, 3.9]
@@ -62,5 +61,5 @@ jobs:
           python -m pip install --upgrade pip six pywin32 setuptools codecov coverage
     - name: Unit Test test
       run: |
-        .\share\spack\qa\windows_test_setup.ps1
+        Invoke-Expression -Command .\share\spack\qa\windows_test_setup.ps1
         spack unit-test

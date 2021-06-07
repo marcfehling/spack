@@ -60,4 +60,9 @@ DOSKEY spacktivate=spack env activate $*
 @echo ** Spack Package Manager
 @echo **********************************************************************
 
+IF "%1"=="" GOTO CONTINUE
+set
+GOTO:EOF
+
+:continue
 %comspec% /k

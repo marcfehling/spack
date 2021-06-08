@@ -40,7 +40,8 @@ jobs:
         python -m pip install --upgrade pip six setuptools flake8 mypy>=0.800 black pywin32
     - name: Run style tests
       run: |
-          python bin\spack style
+          Invoke-Expression -Command .\share\spack\qa\windows_test_setup.ps1
+          spack style
     - name: Verify license headers
       run: |
           python bin\spack license verify
@@ -59,4 +60,5 @@ jobs:
     - name: Unit Test test
       run: |
         Invoke-Expression -Command .\share\spack\qa\windows_test_setup.ps1
-        spack unit-test lib\spack\spack\test\llnl
+        spack -h
+        spack unit-test

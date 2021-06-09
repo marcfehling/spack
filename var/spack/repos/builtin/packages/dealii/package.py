@@ -184,7 +184,8 @@ class Dealii(CMakePackage, CudaPackage):
     depends_on('netcdf-c+mpi',     when='+netcdf+mpi')
     depends_on('netcdf-cxx',       when='+netcdf+mpi')
     depends_on('oce',              when='+oce')
-    depends_on('p4est',            when='+p4est+mpi')
+    # cannot be built with p4est newer than 2.2
+    depends_on('p4est@2.2:',       when='+p4est+mpi')
     depends_on('petsc+mpi~int64',  when='+petsc+mpi~int64')
     depends_on('petsc+mpi+int64',  when='+petsc+mpi+int64')
     depends_on('petsc@:3.6.4',     when='@:8.4.1+petsc+mpi')

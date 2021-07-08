@@ -468,7 +468,12 @@ class Dealii(CMakePackage, CudaPackage):
             'DEAL_II_WITH_THREADS', 'threads'
         ))
         if '+threads' in spec:
-            if (spec.satisfies('^intel-parallel-studio+tbb')):
+            if (spec.satisfies('%intel@??+tbb@??')):
+                # avoid 'internal error: bad pointer' by using bundled TBB
+                options.append(
+                    self.define('DEAL_II_FORCE_BUNDLED_TBB', True)
+                )
+            elif (spec.satisfies('^intel-parallel-studio+tbb')):
                 # deal.II/cmake will have hard time picking up TBB from Intel.
                 tbb_ver = '.'.join(('%s' % spec['tbb'].version).split('.')[1:])
                 options.extend([
